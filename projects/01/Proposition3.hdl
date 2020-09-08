@@ -1,0 +1,14 @@
+//Proposition 3:  The server can send an email if the router IP is static or if two ports are open.
+//Description: Proposition 3 circut
+
+CHIP Proposition3 {
+	IN p,q,r;
+	OUT out;
+	
+	PARTS:
+	Not(in=p , out=notp);
+	Not(in=q , out=notq);
+	And(a=notp , b=notq , out=c);
+	Or(a=c , b = r , out = out);
+
+}

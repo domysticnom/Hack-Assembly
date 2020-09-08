@@ -1,0 +1,72 @@
+ @R2
+ R2->M=0  
+                        // Lets say data in R0 = 24 and R1 = 4
+ @R1
+ D = R1->M              // To store this data from R1, we set D = 4
+ @IFR1EQ0
+ D, JEQ                 // checks if D == 0
+ @b 
+ b->M=D                 // Using the global variable D, which is holding the data from R0, the data in b->M becomes 4
+ 
+ @R0
+ D = R0->M              // now, in order to store the data from R0, we set D = R0->M , so now D = 24
+ @IFR0EQ0               // checks if D == 0
+ D, JEQ 
+ @a    
+ a->M = D               // the data in a->M = 24, where 24 is D, and D is equal to the data in R0
+ 
+(LOOP)
+ @b                     // 1. D = 24 || 2. D = 20 || 3. D = 16 || 4. D = 12 || 5. D = 8 || 6. D = 4 || 7. D = 0
+ D = D - M              // 1. this means D = 24 - (b->M) == 24 - 4 = 20 || 2. now D = 20 so, D = D - (b->M) == 20 - 4 = 16, so now D = 16
+ @MODULO
+ D, JLT                 // 1. checks if D < 0 , 20 < 0                  || 2. checks if D < 0 , 16 < 0
+ @EVENDIV
+ D, JEQ                 // 1. checks if D == 0 , 20 == 0                || 2. 16 == 0
+ @LOOP                  // 1. go back to start of loop                  || 2. start over and same process until we either hit 0 or a                                                                             a negative number.
+ 0, JMP
+ 
+(MODULO)
+ @b
+ D = D + M              // adds b->M to the global variable D
+ @c		
+ M = D                  // sets the data in c -> M = the global variable D, which is the remainder
+ @b
+ D = M                  // preps the movement of the data in register b by setting the global variable equal to the data in b
+ @a
+ M = D                  // sets the data in 'a' equal to the global variable, where the global variable is equal to 'b' data.
+ @c
+ D = M                  // sets the global variable equal to the data in c, which is the remainder
+ @b
+ M = D                  // sets the data in 'b' equal to the global variable, where the global variable was set to the data in 'c'
+ @a
+ D = M                  // sets the global variable equal to the new item being divided, which is the data in 'a'
+ @LOOP                  // go back to the loop
+ 0,JMP
+ 
+(EVENDIV)
+ @b
+ D = M
+ @R2
+ M = D
+ @END
+ 0, JMP
+ 
+(IFR0EQ0)
+ @R1
+ D=M
+ @R2
+ M=D
+ @END
+ 0, JMP
+ 
+(IFR1EQ0)
+ @R0
+ D=M
+ @R2
+ M=D
+ @END
+ 0, JMP
+ 
+(END)
+ @END
+ 0, JMP

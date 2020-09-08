@@ -1,0 +1,15 @@
+CHIP mag3 {
+	IN in[3];
+	OUT out;
+	
+	PARTS:
+	Not(in = in[0] , out = nota);
+	Not(in = in[1] , out = notb);
+	Not(in = in[2] , out = notc);
+	And(a = notc , b = notb , out = out1);
+	And(a = in[1] , b = na , out = out2);
+	And(a = in[0] , b = in[2] , out = out3);
+	Or(a = out1 , b = out2 , out = out4);
+	Or(a = out3 , b = out4 , out = out);
+	
+}

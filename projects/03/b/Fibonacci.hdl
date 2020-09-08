@@ -1,0 +1,21 @@
+// File: Fibonacci.hdl
+// Author: Dominic Rivas
+// Date: 02/20/2020
+// Section: 508 
+// E-mail: dominicr1001@tamu.edu 
+// Description:This program calculates the fibonacci up to a certain point determined by the user.
+
+//The first mux selects the Register 3's output, or the base f0. Then the register loads the mux's data if enabled, else keeps the original data. Then the second mux chooses Register 1's output, or the base f1, then Register 1's output and Register 2's output are added, and if enabled, register 3's data will become the sum.
+CHIP Fibonacci {
+	IN f0[16], enable1, msel, enable2, enable3, f1[16];
+	OUT out[16];
+
+	PARTS:
+	//Put your code here
+	Mux16(a = f0 , b = outf , sel = msel , out = outa ); 
+	Register(in = outa , load = enable1 , out = outb ); 
+	Mux16(a = f1 , b = outb , sel = msel , out = outc );
+	Register(in = outc , load = enable2 , out = outd );
+	Add16( a = outb , b = outd , out = oute);
+	Register(in = oute , load = enable3 , out = outf , out = out );
+}

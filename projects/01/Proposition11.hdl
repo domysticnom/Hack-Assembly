@@ -1,0 +1,13 @@
+//Proposition 1: The operating system is installed and the disk is not partitioned
+//p: The operating system is installed.
+//q: The disk is partitioned
+
+CHIP Proposition11{
+     IN p, q;
+     OUT out;
+
+     PARTS:
+     Not(in = q, out = notq);
+     And(a= p, b=notq, out= out);
+
+}

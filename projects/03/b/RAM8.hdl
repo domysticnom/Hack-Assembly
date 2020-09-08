@@ -1,0 +1,37 @@
+// File: RAM8.hdl
+// Author: Dominic Rivas
+// Date: 02/20/2020
+// Section: 508 
+// E-mail: dominicr1001@tamu.edu 
+// Description: Memory of 8 registers.
+/**
+ * Memory of 8 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM8 {
+    IN in[16], load, address[3];
+    OUT out[16];
+
+    PARTS:
+    DMux(in = load , sel = address[2] , a = ao , b = bo);
+	DMux4Way( in = ao , sel = address[0..1] , a = a , b = b , c = c , d = d);
+	DMux4Way( in = bo , sel = address[0..1] , a = e , b = f , c = g , d = h);
+	
+	Register( in = in , load = a , out = ax);
+	Register( in = in , load = b , out = bx);
+	Register( in = in , load = c , out = cx);
+	Register( in = in , load = d , out = dx);
+	Register( in = in , load = e , out = ex);
+	Register( in = in , load = f , out = fx);
+	Register( in = in , load = g , out = gx);
+	Register( in = in , load = h , out = hx);
+	
+	Mux4Way16(a = ax , b = bx , c = cx , d = dx , sel = address[0..1] , out = out1);
+	Mux4Way16(a = ex , b = fx , c = gx , d = hx , sel = address[0..1] , out = out2);
+	Mux16(a = out1 , b = out2 , sel = address[2] , out = out);
+	
+	
+}

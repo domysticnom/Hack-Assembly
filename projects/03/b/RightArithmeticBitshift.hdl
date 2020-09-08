@@ -1,0 +1,27 @@
+// File: RightArithmeticBitshift.hdl
+// Author: Dominic Rivas
+// Date: 02/20/2020
+// Section: 508 
+// E-mail: dominicr1001@tamu.edu 
+// Description:This program takes in an input 1 bit at a time, and if load is == to 0, the perform and arithmetic shift, else continue push_fronting the bits.
+
+/**
+ * Please read instruction in project document
+ * 
+ */
+
+CHIP RightArithmeticBitshift {
+    IN in, load, reset;
+    OUT out[4];
+	
+    PARTS:
+	Mux(a = xb , b = in , sel = load , out = qa); // select old or new bit
+	Mux(a = qa , b = false , sel = reset , out = oa);//shift or reset
+	Mux(a = xb , b = false , sel = reset , out = ob);
+	Mux(a = xc , b = false , sel = reset , out = oc);
+	Mux(a = xd , b = false , sel = reset , out = od);
+	Bit(in = oa, load = true , out = out[3] , out = xb);
+	Bit(in = ob, load = true , out = out[2] , out = xc);
+	Bit(in = oc, load = true , out = out[1] , out = xd);
+	Bit(in = od, load = true , out = out[0]);
+}

@@ -1,0 +1,23 @@
+// File: FullAdder.hdl
+// Author: Dominic Rivas
+// Date: 02/11/2020
+// Section: 508
+// E-mail: dominicr1001@tamu.edu 
+// Description: Adds 3 bits together
+/**
+ * Computes the sum of three bits.
+ */
+
+CHIP FullAdder {
+    IN a, b, c;  // 1-bit inputs
+    OUT sum,     // Right bit of a + b + c
+        carry;   // Left bit of a + b + c
+
+    PARTS:
+    // Put you code here:
+	Xor( a = a , b = b , out = tempsum);
+	And( a = a , b = b , out = tempcarry);
+	Xor( a = tempsum , b = c, out = sum);
+	And( a = tempsum , b = c , out = Acarry);
+	Or( a = tempcarry, b = Acarry, out = carry);
+}

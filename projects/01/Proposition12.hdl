@@ -1,0 +1,13 @@
+//Proposition 1: The operating system is installed and the disk is not pertitioned
+//p: The operating system is installed.
+//q: Then the server boots.
+
+CHIP Proposition12{
+     IN p, q;
+     OUT out;
+
+     PARTS:
+     Not(in = p, out = notp);
+     And(a= notp, b= q, out= out);
+
+}

@@ -1,0 +1,24 @@
+//Proposition 1: The operating system is installed and the disk is not pertitioned
+//p: The server password is secure.
+//q: The administrator cannot log in.
+//r: The administrator cannot install the Apache software.
+
+CHIP Proposition14{
+     IN p, q, r;
+     OUT out;
+
+     PARTS:
+
+     And(a =q, b= r, out= qandr);
+     Or(a= p, b= qandr, out= aorb);
+     Not(in= aorb, out= out);
+     
+     
+     
+   
+     
+     
+     
+     
+
+}

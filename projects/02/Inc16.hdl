@@ -1,0 +1,19 @@
+// File: Inc16.hdl
+// Author: Dominic Rivas
+// Date: 02/11/2020
+// Section: 508
+// E-mail: dominicr1001@tamu.edu 
+// Description: Incremements a 16 bit number by 1.
+/**
+ * 16-bit incrementer:
+ * out = in + 1 (arithmetic addition)
+ */
+
+CHIP Inc16 {
+    IN in[16];
+    OUT out[16];
+
+    PARTS:
+   // Put you code here:
+   Add16( a = in , b[0] = true , out = out);
+}

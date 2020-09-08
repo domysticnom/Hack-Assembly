@@ -1,0 +1,36 @@
+// File: ThreeOneDetector.hdl
+// Author: Dominic Rivas
+// Date: 02/11/2020
+// Section: 508
+// E-mail: dominicr1001@tamu.edu 
+// Description: Detects if there are 3 consecutive 1's. Returns 1 if true
+/**
+ * A three 1s detector detects three consecutive 1s in 8-bit input.
+ * Example: input: 00011101 > output: 1, input: 10101011 > output: 0, 
+ * input: 11110000 > output 1 etc.
+ */
+
+CHIP ThreeOneDetector{
+    IN a[8];
+    OUT out;
+
+    PARTS:
+   // Put you code here:
+   And(a = a[0] , b = a[1] , out = a1);
+   And(a = a1 , b = a[2] , out = chk1);
+   And(a = a[1] , b = a[2] , out = a2);
+   And(a = a2 , b = a[3] , out = chk2);
+   And(a = a[2] , b = a[3] , out = a3);
+   And(a = a3 , b = a[4] , out = chk3);
+   And(a = a[3] , b = a[4] , out = a4);
+   And(a = a4 , b = a[5] , out = chk4);
+   And(a = a[4] , b = a[5] , out = a5);
+   And(a = a5 , b = a[6] , out = chk5);
+   And(a = a[5] , b = a[6] , out = a6);
+   And(a = a6 , b = a[7] , out = chk6);
+   Or(a = chk1 , b = chk2 , out = c);
+   Or(a = c , b = chk3 , out = d);
+   Or(a = d , b = chk4 , out = e);
+   Or(a = e , b = chk5 , out = f);
+   Or(a = f , b = chk6 , out = out);
+}

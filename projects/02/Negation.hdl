@@ -1,0 +1,19 @@
+// File: Negation.hdl
+// Author: Dominic Rivas
+// Date: 02/11/2020
+// Section: 508
+// E-mail: dominicr1001@tamu.edu 
+// Description: Negates a 16-bit number.
+/**
+ * Negate a 16-bit number, be aware that first bit is the sign-bit
+ */
+
+CHIP Negation {
+    IN in[16];
+    OUT out[16];
+
+    PARTS:
+   // Put you code here:
+   Not16(in = in , out = out16);
+   Inc16(in = out16 , out = out); 
+}

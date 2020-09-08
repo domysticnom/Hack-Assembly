@@ -1,0 +1,22 @@
+//Proposition 1: The operating system is installed and the disk is not pertitioned
+//p: The router IP is static
+//q: The server can send an email 
+//r: Two ports are open
+
+CHIP Proposition13{
+     IN p, q, r;
+     OUT out;
+
+     PARTS:
+
+     Or(a= p, b= r, out= porr);
+     Not(in= porr, out =notpr);
+     Or(a= notpr, b= q, out= out);
+     
+   
+     
+     
+     
+     
+
+}

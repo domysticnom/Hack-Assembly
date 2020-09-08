@@ -1,0 +1,26 @@
+// File: PC.hdl
+// Author: Dominic Rivas
+// Date: 02/20/2020
+// Section: 508 
+// E-mail: dominicr1001@tamu.edu 
+// Description:This program is a program counter.
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+	Inc16(in = incy , out = increm );
+	Mux16(a = incy , b = increm , sel = inc , out = ao);
+	Mux16(a = ao , b = in , sel = load , out = bo);
+	Mux16(a = bo , b[0..15] = false , sel = reset, out = pa);
+	Register(in = pa, load = true , out = out , out = incy );
+	
+}

@@ -1,0 +1,23 @@
+// File: AggieCipher.hdl
+// Author: Dominic Rivas
+// Date: 02/20/2020
+// Section: 508 
+// E-mail: dominicr1001@tamu.edu 
+// Description: This program adds whatever the clock count is to an input, where the max count is 15.
+/**
+ * Implement a 4-bit dynamic shift cipher(we call it aggie cipher :)) that computes out=in+counter, where counter=<0,1,2,3,4,5,6,....,15,0,1,2,...>
+ * Please write the truth table of the circuit in another text file.
+ * You may use the 4-bit adder you implemented in project 2
+ */
+
+CHIP AggieCipher {
+    IN in[4];
+    OUT out[4];
+    
+	PARTS:
+	PC(in[0..3] = false, load = false , inc = true , reset = false , out[0..3] = count );
+    Add4( a = in , b = count , out = out , carry = drop );
+	
+	
+	
+}

@@ -1,0 +1,14 @@
+//Proposition 4:  If the server password is not secure, then the administrator cannot log in and cannot install the Apache //software.
+//Description: Proposition 4 circut
+
+CHIP Proposition4 {
+	IN p,q,r;
+	OUT out;
+	
+	PARTS:
+	Not(in=r , out=notr);
+	Not(in=q , out=notq);
+	And(a=notq , b=notr , out=c);
+	Or(a=c , b = p , out = out);
+
+}

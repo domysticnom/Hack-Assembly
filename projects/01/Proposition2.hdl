@@ -1,0 +1,12 @@
+//Proposition 2: If the operating system is installed then the server boots.
+//Description: Proposition 2 circut
+
+CHIP Proposition2 {
+	IN p,q;
+	OUT out;
+	
+	PARTS:
+	Not(in=p , out=notp);
+	Or(a = notp , b = q, out = out);
+
+}

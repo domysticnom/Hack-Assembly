@@ -1,0 +1,12 @@
+//Proposition 1: The operating system is installed and the disk is not partitioned.
+//Description: Proposition 1 circut
+
+CHIP Proposition1 {
+	IN p, q;
+	OUT out;
+	
+	PARTS:
+	Not( in = q , out = notq);
+	And( a = p , b = notq, out = out);
+
+}
